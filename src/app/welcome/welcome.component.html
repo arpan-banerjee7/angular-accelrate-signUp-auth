@@ -1,5 +1,18 @@
 <div class="container">
-  <div class="col-xs-12 col-md-8 col-offset-2">
-    <h1 style="text-align: center;">You are now logged in !</h1>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 style="text-align: center;" *ngIf="isAuthenticated">
+        You are now logged in !
+      </h1>
+      <h1 style="text-align: center;" *ngIf="!isAuthenticated">
+        Logged out! Please log in again...
+      </h1>
+      <p style="text-align: center;" *ngIf="!isAuthenticated">
+        <a [routerLink]="['/login']">Log In</a>
+      </p>
+      <p style="text-align: center;" *ngIf="isAuthenticated">
+        <a (click)="logOut()">Log Out</a>
+      </p>
+    </div>
   </div>
 </div>
