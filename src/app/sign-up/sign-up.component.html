@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="!hasSignedUp">
   <div class="row">
     <div class="col-xs-12 col-md-4 col-md-offset-4">
       <div class="alert alert-danger" *ngIf="error">
@@ -27,12 +27,7 @@
               class="form-control"
               formControlName="email"
             />
-            <span
-              *ngIf="
-                !signUpForm.get('email').valid &&
-                signUpForm.get('email').touched
-              "
-              class="help-block"
+            <span *ngIf="!email.valid && email.touched" class="help-block"
               >Please enter a valid email!</span
             >
           </div>
@@ -45,26 +40,47 @@
               formControlName="dateOfBirth"
             />
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              class="form-control"
-              formControlName="password"
-            />
-            <span
+          <div formGroupName="passwordGroup">
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                formControlName="password"
+              />
+              <span
+                *ngIf="!password.valid && password.touched"
+                class="help-block"
+                >Password must of minimum 8 characters!</span
+              >
+            </div>
+            <div class="form-group">
+              <label for="password">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                class="form-control"
+                formControlName="confirmPassword"
+              />
+              <span
+                *ngIf="!confirmPassword.valid && confirmPassword.touched"
+                class="help-block"
+                >Please Confirm your password</span
+              >
+            </div>
+            <div
+              class="error"
               *ngIf="
-                !signUpForm.get('password').valid &&
-                signUpForm.get('password').touched
+                password.valid && confirmPassword.valid && formGroup.invalid
               "
-              class="help-block"
-              >Password must of minimum 8 characters!</span
             >
+              Passwords don't match!
+            </div>
           </div>
 
           <div>
-            <label for="dateOfBirth">Gender</label>
+            <label for="gender">Gender</label>
             <div class="radio" *ngFor="let gender of genders">
               <label>
                 <input
@@ -88,6 +104,15 @@
           Already have an account?<a [routerLink]="['/login']">Log In</a>
         </p>
       </div>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="hasSignedUp">
+  <div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+      <h3 style="text-align: center;">
+        You are Signed Up!<a [routerLink]="['/login']">Log In</a>
+      </h3>
     </div>
   </div>
 </div>

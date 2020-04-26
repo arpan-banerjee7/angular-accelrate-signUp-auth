@@ -33,7 +33,7 @@ export class AuthService {
   signup(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[Api Key]",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA-AsE58E63Ts_46gL8FYMsMehIhDTy5Ng",
         {
           email: email,
           password: password,
@@ -56,7 +56,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[Api Key]",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA-AsE58E63Ts_46gL8FYMsMehIhDTy5Ng",
         {
           email: email,
           password: password,
@@ -77,6 +77,7 @@ export class AuthService {
   }
 
   private handleError(errorRes: HttpErrorResponse) {
+    console.log(errorRes);
     let errorMessage = "An unknown error occurred!";
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
